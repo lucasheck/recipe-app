@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/x-icon" href="./images/favicon.png" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		/>
+		<title>Recipe App</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/index.js" defer></script>
+	</head>
+	<body>
+		<div class="mobile-container">
+			<header class="header">
+				<a href="#" class="logo">
+					<img src="images/logo.png" />
+				</a>
+				<div class="search">
+					<!-- prettier-ignore -->
+					<input type="text" class="search-box" id="search-box" placeholder="Search a meal" />
+					<button
+						id="btn-search"
+						name="btn-search"
+						class="btn-search"
+					>
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</div>
+			</header>
+			<div class="search-meals" id="search-meals"></div>
+			<div class="fav-meals">
+				<header class="header-fav-meals">Favorite Meals</header>
+				<ul id="ul-favorite-meals"></ul>
+			</div>
+			<div class="search-meal" id="search-meal"></div>
+			<div class="random-meal" id="random-meal"></div>
+		</div>
+	</body>
+</html>
