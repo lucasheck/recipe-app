@@ -22,11 +22,8 @@
 				<div class="search">
 					<!-- prettier-ignore -->
 					<input type="text" class="search-box" id="search-box" placeholder="Search a meal" />
-					<button
-						id="btn-search"
-						name="btn-search"
-						class="btn-search"
-					>
+					<!-- prettier-ignore -->
+					<button id="btn-search" name="btn-search" class="btn-search" >
 						<i class="fa-solid fa-magnifying-glass"></i>
 					</button>
 				</div>
@@ -39,7 +36,21 @@
 				</p>
 			</div>
 			<div class="random-meal" id="random-meal"></div>
-			<div class="search-meals" id="search-meals"></div>
+			<div class="search-meals" id="search-meals">
+				<div class="searched-meal">
+					<img
+						class="img-searched-meal"
+						src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+						alt=""
+					/>
+					<div class="searched-meal-info">
+						<h5 class="searched-meal-title">
+							<a>Arroz com Batata</a>
+						</h5>
+						<i id="meal-img-heart" class="far fa-heart"></i>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

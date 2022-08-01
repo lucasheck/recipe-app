@@ -322,3 +322,42 @@ body {
 	opacity: 1;
 	pointer-events: initial;
 }
+
+.search-meals {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-bottom: 40px;
+}
+
+.searched-meal {
+	width: 100%;
+	margin: 0 20px 20px 20px;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.searched-meal-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 40px;
+}
+
+.img-searched-meal {
+	width: 100%;
+}
+
+.searched-meal-info > h4 {
+	color: var(--clr-black);
+	font-size: 0.9em;
+	margin: 0 0 5px 10px;
+	cursor: pointer;
+}
+
+#meal-img-heart {
+	position: relative !important;
+	margin-bottom: 5px;
+	cursor: pointer;
+}

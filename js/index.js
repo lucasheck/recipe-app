@@ -12,6 +12,7 @@ document.getElementById("btn-search").addEventListener("click", () => {
 
 document.getElementById("search-box").addEventListener("keypress", (event) => {
 	if (event.key === "Enter") {
+		console.log("enter");
 		validateMealName();
 	}
 });
@@ -30,14 +31,16 @@ async function searchMealByName(mealName) {
 		`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`
 	);
 	const dataMeal = await data.json();
-	const meals = dataMeal.meals;
-	let meal = document.createElement("div");
-	let ids = "";
-	meals.forEach((e) => {
-		ids += e.idMeal + ",";
-	});
-	meal.innerHTML = `<p>${ids}</p>`;
-	divSearchMeals.appendChild(meal);
+	if (dataMeal.meals !== null) {
+		const meals = dataMeal.meals;
+		let meal = document.createElement("div");
+		let ids = "";
+		meals.forEach((e) => {
+			ids += e.idMeal + ",";
+		});
+		meal.innerHTML = `<p>${ids}</p>`;
+		divSearchMeals.appendChild(meal);
+	}
 }
 
 function loadFavoriteMeals() {
