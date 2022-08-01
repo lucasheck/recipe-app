@@ -1,13 +1,35 @@
 # recipe-app
 
-Recipe APP for training
+Recipe APP
 
-Projeto criado apenas para treinar e melhorar as habilidades de desenvolvimento.
+Search and learn how to cook meals.
+You can also favorite the meals of your choice.
 
-This project is just for training and improve development skills.
+##
 
-technologies used:
+Objective:
 
--   HTML
--   CSS
+This project was created for training and improve development skills only.
+
+##
+
+Technologies used:
+
+-   HTML5
+-   CSS3
 -   JS
+
+##
+
+Implemented features:
+
+-   Get a random meal
+-   Show details of a meal
+-   Favorite a meal
+-   Store favorite meals in Local Storage
+-   Consuming API (themealdb.com)
+
+TO DO:
+
+-   Search by name
+-   Acessibility (access all buttons by keyboard)

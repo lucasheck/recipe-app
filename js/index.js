@@ -1,22 +1,29 @@
-const divFavMeals = document.getElementById("ul-favorite-meals");
+const ulFavMeals = document.getElementById("ul-favorite-meals");
 const divRandomMeal = document.getElementById("random-meal");
 const divSearchMeals = document.getElementById("search-meals");
-
-/*
-mealsearch
-add button to all event clicks for better accessibility
-*/
+const divFavMeals = document.getElementById("fav-meals");
+const pNoFavMeals = document.getElementById("no-fav-meals");
 
 /* events listener */
+
 document.getElementById("btn-search").addEventListener("click", () => {
+	validateMealName();
+});
+
+document.getElementById("search-box").addEventListener("keypress", (event) => {
+	if (event.key === "Enter") {
+		validateMealName();
+	}
+});
+
+/* end event listener */
+
+function validateMealName() {
 	let mealName = document.getElementById("search-box");
 	if (mealName.value.length < 3)
 		alert("Meal name must have at least 3 character.");
 	else searchMealByName(mealName.value);
-});
-
-getRandomMeal();
-loadFavoriteMeals();
+}
 
 async function searchMealByName(mealName) {
 	const data = await fetch(
@@ -29,13 +36,14 @@ async function searchMealByName(mealName) {
 	meals.forEach((e) => {
 		ids += e.idMeal + ",";
 	});
-	console.log(ids);
 	meal.innerHTML = `<p>${ids}</p>`;
 	divSearchMeals.appendChild(meal);
 }
 
 function loadFavoriteMeals() {
 	const mealIds = getMealsFromLocalStorage();
+	if (mealIds.length > 0) pNoFavMeals.style.display = "none";
+	/* todo -- colocar msg de nenhuma refeição favorita até então */
 	mealIds.forEach((id) => {
 		addFavoriteMeal(id);
 	});
@@ -60,11 +68,11 @@ async function addFavoriteMeal(mealId) {
 	/* prettier-ignore */
 	favMeal.querySelector("#btn-remove-favorite-meal").addEventListener("click", () => {
 		let liFavMeal = document.getElementById(mealData.idMeal);
-		divFavMeals.removeChild(liFavMeal);
+		ulFavMeals.removeChild(liFavMeal);
 		removeMealFromLocalStorage(mealData.idMeal);
 	});
 
-	divFavMeals.appendChild(favMeal);
+	ulFavMeals.appendChild(favMeal);
 }
 
 async function getRandomMeal() {
@@ -148,13 +156,13 @@ function toggleFavoriteMeal(idMeal, strMeal, strMealThumb) {
 			toggleFavoriteMeal(idMeal);
 		});
 		addMealToLocalStorage(idMeal);
-		divFavMeals.appendChild(meal);
+		ulFavMeals.appendChild(meal);
 	} else {
 		/* remove solid heart */
 		elFavoriteMeal.classList.replace("fas", "far");
 		/* remove the favMeal and from localStorage */
 		let liFavMeal = document.getElementById(idMeal);
-		divFavMeals.removeChild(liFavMeal);
+		ulFavMeals.removeChild(liFavMeal);
 		removeMealFromLocalStorage(idMeal);
 	}
 }
@@ -168,10 +176,13 @@ function addMealToLocalStorage(idMeal) {
 	const mealIds = getMealsFromLocalStorage();
 
 	localStorage.setItem("mealIds", JSON.stringify([...mealIds, idMeal]));
+
+	pNoFavMeals.style.display = "none";
 }
 
 function removeMealFromLocalStorage(idMeal) {
 	const mealIds = getMealsFromLocalStorage();
+	if (mealIds.length === 1) pNoFavMeals.style.display = "inherit";
 	/* prettier-ignore */
 	localStorage.setItem("mealIds", JSON.stringify(mealIds.filter((id) => id != idMeal)));
 }
@@ -181,3 +192,6 @@ function getMealsFromLocalStorage() {
 
 	return mealIds === null ? [] : mealIds;
 }
+
+getRandomMeal();
+loadFavoriteMeals();

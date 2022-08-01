@@ -60,6 +60,7 @@ body {
 .logo {
 	width: 45%;
 	display: flex;
+	margin-left: 5px;
 }
 
 .logo img {
@@ -100,6 +101,11 @@ body {
 	margin-bottom: 10px;
 	height: auto;
 	min-height: 132px;
+	text-align: center;
+}
+
+.no-fav-meals {
+	display: inherit;
 }
 
 .fav-meals > ul::-webkit-scrollbar {
