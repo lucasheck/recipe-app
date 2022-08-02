@@ -14,7 +14,7 @@
 
 body {
 	padding-top: 0;
-	margin: 0;
+	margin: 20px 0;
 	font-family: "Poppins", sans-serif;
 	display: flex;
 	justify-content: center;
@@ -45,17 +45,6 @@ body {
 	padding: 10px 0 10px 0;
 	height: 60px;
 }
-
-/* .logo {
-	font-size: 1.2rem;
-	margin-right: 1.5em;
-	color: var(--clr-orange);
-	text-decoration: none;
-	border: var(--clr-orange) solid 0.1em;
-	border-radius: 0.35em;
-	padding: 0.2em 0.85em;
-	box-shadow: 0 0 0.1em currentColor;
-} */
 
 .logo {
 	width: 45%;
@@ -290,9 +279,10 @@ body {
 }
 
 .random-meal-info .fa-close {
-	position: fixed;
+	position: absolute;
 	top: auto;
-	margin: 15px 0 0 345px;
+	right: 10px;
+	margin: 15px 0 0 0;
 	padding: 1px 2px 0px 3px;
 	cursor: pointer;
 	background-color: white;
@@ -300,27 +290,26 @@ body {
 	border-radius: 5px;
 }
 
-.random-meal-info::-webkit-scrollbar {
+.random-meal-info::-webkit-scrollbar,
+.searched-meal-description::-webkit-scrollbar {
 	width: 10px;
 }
 
-.random-meal-info::-webkit-scrollbar-thumb {
+.random-meal-info::-webkit-scrollbar-thumb,
+.searched-meal-description::-webkit-scrollbar-thumb {
 	background: var(--clr-light-orange);
 	border-radius: 10px;
 }
 
-.random-meal-info::-webkit-scrollbar-thumb:active {
+.random-meal-info::-webkit-scrollbar-thumb:active,
+.searched-meal-description::-webkit-scrollbar-thumb:active {
 	background: var(--clr-light-orange-active);
 }
 
-.random-meal-info::-webkit-scrollbar-track {
+.random-meal-info::-webkit-scrollbar-track,
+.searched-meal-description::-webkit-scrollbar-track {
 	background: var(--clr-light-gray);
 	border-radius: 10px;
-}
-
-.opacity {
-	opacity: 1;
-	pointer-events: initial;
 }
 
 .search-meals {
@@ -370,7 +359,43 @@ body {
 }
 
 .searched-meal-title {
+	padding-right: 17px;
 	padding-left: 10px;
 	font-size: 0.9rem;
 	color: var(--clr-black);
+}
+
+.searched-meal-description {
+	width: 95%;
+	height: 425px;
+	position: absolute;
+	padding: 0 5px;
+	transform: translateY(-425px);
+	left: 10px;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transition: opacity 200ms ease-in-out;
+	pointer-events: none;
+	overflow-y: auto;
+	scrollbar-color: var(--clr-light-orange) var(--clr-light-gray);
+	scrollbar-width: thin;
+	text-align: justify;
+	font-size: 0.8rem;
+}
+
+.btn-close-description {
+	position: absolute;
+	right: 10px;
+	top: 20px;
+	cursor: pointer;
+	box-shadow: 0 0 5px black;
+	padding: 1px 2px 0px 3px;
+	border-radius: 5px;
+}
+
+.opacity {
+	opacity: 0.95;
+	pointer-events: initial;
 }

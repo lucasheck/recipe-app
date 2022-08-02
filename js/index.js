@@ -12,7 +12,6 @@ document.getElementById("btn-search").addEventListener("click", () => {
 
 document.getElementById("search-box").addEventListener("keypress", (event) => {
 	if (event.key === "Enter") {
-		console.log("enter");
 		validateMealName();
 	}
 });
@@ -33,30 +32,52 @@ async function searchMealByName(mealName) {
 	const dataMeal = await data.json();
 	if (dataMeal.meals !== null) {
 		const meals = dataMeal.meals;
+		divSearchMeals.innerHTML = "";
 		meals.forEach((e) => {
-			console.log(e);
 			let meal = document.createElement("div");
 			meal.classList.add("searched-meal");
+			/* prettier-ignore */
 			meal.innerHTML = `
 				<img class="searched-meal-img" src="${e.strMealThumb}" alt="${e.strMeal}" />
 				<div class="searched-meal-info">
-					<a class="searched-meal-title"> ${e.strMeal} </a>
+					<a class="searched-meal-title" id="searched-meal-title-${e.idMeal}">${e.strMeal}</a>
 					<i id="meal-img-heart-${e.idMeal}" class="far fa-heart searched-meal-heart"></i>
+				</div>
+				<div class="searched-meal-description" id="meal-description-${e.idMeal}">
+					<i class="fas fa-close btn-close-description" id="btn-close-info-${e.idMeal}"></i>
+					<h4>Description:</h4>
+					<span>${e.strInstructions.replaceAll("\r\n", "<br/>")}</span>
 				</div>
 			`;
 			divSearchMeals.appendChild(meal);
+			checkFavoriteMeal(e.idMeal);
 			/* prettier-ignore */
 			meal.querySelector(`#meal-img-heart-${e.idMeal}`).addEventListener("click", () => {
 				toggleFavoriteMeal(e.idMeal, e.strMeal, e.strMealThumb)
 			});
+			/* prettier-ignore */
+			meal.querySelector(`#searched-meal-title-${e.idMeal}`).addEventListener("click",() => {
+				toggleMoreInfo(e.idMeal);
+			});
+			/* prettier-ignore */
+			meal.querySelector(`#btn-close-info-${e.idMeal}`).addEventListener("click", () => {
+				toggleMoreInfo(e.idMeal);
+			});
 		});
+	}
+}
+
+function checkFavoriteMeal(idMeal) {
+	if (getMealsFromLocalStorage().includes(idMeal)) {
+		document
+			.getElementById(`meal-img-heart-${idMeal}`)
+			.classList.replace("far", "fas");
 	}
 }
 
 function loadFavoriteMeals() {
 	const mealIds = getMealsFromLocalStorage();
 	if (mealIds.length > 0) pNoFavMeals.style.display = "none";
-	/* todo -- colocar msg de nenhuma refeição favorita até então */
 	mealIds.forEach((id) => {
 		addFavoriteMeal(id);
 	});
@@ -180,9 +201,16 @@ function toggleFavoriteMeal(idMeal, strMeal, strMealThumb) {
 	}
 }
 
-function toggleMoreInfo() {
-	let elMealInfo = document.getElementById("random-meal-info");
+function toggleMoreInfo(idMeal = 0) {
+	let elMealInfo;
+	if (!idMeal) {
+		elMealInfo = document.getElementById("random-meal-info");
+	} else {
+		elMealInfo = document.getElementById(`meal-description-${idMeal}`);
+	}
+	console.log(elMealInfo.classList + " click");
 	elMealInfo.classList.toggle("opacity");
+	console.log(elMealInfo.classList);
 }
 
 function addMealToLocalStorage(idMeal) {

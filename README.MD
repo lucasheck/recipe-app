@@ -29,7 +29,3 @@ Implemented features:
 -   Favorite a meal
 -   Store favorite meals in Local Storage
 -   Consuming API (themealdb.com)
-
-TO DO:
-
--   Acessibility (access all buttons by keyboard)
