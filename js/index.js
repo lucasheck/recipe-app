@@ -1,8 +1,8 @@
 const ulFavMeals = document.getElementById("ul-favorite-meals");
 const divRandomMeal = document.getElementById("random-meal");
-const divSearchMeals = document.getElementById("search-meals");
 const divFavMeals = document.getElementById("fav-meals");
 const pNoFavMeals = document.getElementById("no-fav-meals");
+const divSearchMeals = document.getElementById("search-meals");
 
 /* events listener */
 
@@ -33,13 +33,23 @@ async function searchMealByName(mealName) {
 	const dataMeal = await data.json();
 	if (dataMeal.meals !== null) {
 		const meals = dataMeal.meals;
-		let meal = document.createElement("div");
-		let ids = "";
 		meals.forEach((e) => {
-			ids += e.idMeal + ",";
+			console.log(e);
+			let meal = document.createElement("div");
+			meal.classList.add("searched-meal");
+			meal.innerHTML = `
+				<img class="searched-meal-img" src="${e.strMealThumb}" alt="${e.strMeal}" />
+				<div class="searched-meal-info">
+					<a class="searched-meal-title"> ${e.strMeal} </a>
+					<i id="meal-img-heart-${e.idMeal}" class="far fa-heart searched-meal-heart"></i>
+				</div>
+			`;
+			divSearchMeals.appendChild(meal);
+			/* prettier-ignore */
+			meal.querySelector(`#meal-img-heart-${e.idMeal}`).addEventListener("click", () => {
+				toggleFavoriteMeal(e.idMeal, e.strMeal, e.strMealThumb)
+			});
 		});
-		meal.innerHTML = `<p>${ids}</p>`;
-		divSearchMeals.appendChild(meal);
 	}
 }
 
@@ -95,7 +105,7 @@ async function getRandomMeal() {
 					/>
 				</div>
 				<div class="meal-body">
-					<i id="btn-favorite-meal" class="far fa-heart"></i>
+					<i id="meal-img-heart-${randomMealData.idMeal}" class="far fa-heart"></i>
 					<h4 class="random-meal-title">
 						<a id="random-meal-title"> ${randomMealData.strMeal} </a>
 					</h4>
@@ -132,7 +142,7 @@ async function getRandomMeal() {
 	});
 
 	/* prettier-ignore */
-	meal.querySelector("#btn-favorite-meal").addEventListener("click", () => {
+	meal.querySelector(`#meal-img-heart-${randomMealData.idMeal}`).addEventListener("click", () => {
 		toggleFavoriteMeal(randomMealData.idMeal, randomMealData.strMeal, randomMealData.strMealThumb)
 	});
 
@@ -140,7 +150,7 @@ async function getRandomMeal() {
 }
 
 function toggleFavoriteMeal(idMeal, strMeal, strMealThumb) {
-	let elFavoriteMeal = document.getElementById("btn-favorite-meal");
+	let elFavoriteMeal = document.getElementById(`meal-img-heart-${idMeal}`);
 
 	if (elFavoriteMeal.classList.contains("far")) {
 		/* change to solid heart */

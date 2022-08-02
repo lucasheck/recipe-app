@@ -24,6 +24,7 @@ Technologies used:
 Implemented features:
 
 -   Get a random meal
+-   Search by name
 -   Show details of a meal
 -   Favorite a meal
 -   Store favorite meals in Local Storage
@@ -31,5 +32,4 @@ Implemented features:
 
 TO DO:
 
--   Search by name
 -   Acessibility (access all buttons by keyboard)
